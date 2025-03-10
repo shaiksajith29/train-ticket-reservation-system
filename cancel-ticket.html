@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Ticket</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover; 
+            background-position: center;
+        }
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 120px auto 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .cancel-btn {
+            background: #ff4f4f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .cancel-btn:hover {
+            background: #c00;
+        }
+
+        .booking-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+        .booking-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            position: relative;
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    
+<header>  
+    <img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+        Cancel Ticket
+        <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+     </header>
+
+    <div class="container">
+        <h2>Enter PNR to Cancel Ticket</h2>
+        <input type="text" id="pnrInput" placeholder="Enter PNR Number">
+        <br>
+        <button class="cancel-btn" onclick="cancelTicket()">Cancel Ticket</button>
+        <p id="message" style="font-weight: bold; margin-top: 15px;"></p>
+
+        <h3>Booked Tickets</h3>
+        <ul class="booking-list" id="bookingList">
+            <!-- Default and user bookings will be displayed here -->
+        </ul>
+    </div>
+
+    <footer>
+        &copy; 2025 Train Reservation System | All Rights Reserved
+    </footer>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            let defaultBookings = [
+                { pnr: "1234567890", source: "New York", destination: "Washington", travelDate: "2025-04-15", classType: "AC First Class" },
+                { pnr: "0987654321", source: "Los Angeles", destination: "San Francisco", travelDate: "2025-04-20", classType: "Sleeper" }
+            ];
+
+            let storedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+            if (storedBookings.length === 0) {
+                localStorage.setItem("bookings", JSON.stringify(defaultBookings));
+                storedBookings = defaultBookings;
+            }
+
+            let bookingList = document.getElementById("bookingList");
+            bookingList.innerHTML = ""; 
+
+            storedBookings.forEach(booking => {
+                let bookingItem = document.createElement("li");
+                bookingItem.classList.add("booking-item");
+                bookingItem.innerHTML = `
+                    <strong>PNR:</strong> ${booking.pnr} <br>
+                    <strong>From:</strong> ${booking.source} <br>
+                    <strong>To:</strong> ${booking.destination} <br>
+                    <strong>Date:</strong> ${booking.travelDate} <br>
+                    <strong>Class:</strong> ${booking.classType} <br>
+                    <button class="cancel-btn" onclick="cancelBooking('${booking.pnr}')">Cancel</button>
+                `;
+                bookingList.appendChild(bookingItem);
+            });
+        });
+
+        function cancelTicket() {
+            let pnr = document.getElementById("pnrInput").value.trim();
+            let message = document.getElementById("message");
+
+            if (!pnr) {
+                message.textContent = "Please enter a valid PNR number.";
+                message.style.color = "red";
+                return;
+            }
+
+            cancelBooking(pnr);
+        }
+
+        function cancelBooking(pnr) {
+            let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+            let updatedBookings = bookings.filter(booking => booking.pnr !== pnr);
+
+            if (bookings.length === updatedBookings.length) {
+                document.getElementById("message").textContent = "PNR not found!";
+                document.getElementById("message").style.color = "red";
+                return;
+            }
+
+            localStorage.setItem("bookings", JSON.stringify(updatedBookings));
+            alert("Ticket Cancelled Successfully!");
+            location.reload();
+        }
+    </script>
+
+</body>
+</html>

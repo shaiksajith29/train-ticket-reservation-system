@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 120px auto 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0072ff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+            Train Schedule
+            <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+         </header>
+
+    <div class="container">
+        <h2>Train Schedule</h2>
+        <input type="text" id="search" class="search-bar" placeholder="Search Train Name or Number" onkeyup="filterTrains()">
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Train No</th>
+                    <th>Train Name</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="train-table">
+                <tr>
+                    <td>12345</td>
+                    <td>Express Train</td>
+                    <td>10:00 AM</td>
+                    <td>02:00 PM</td>
+                    <td>On Time</td>
+                </tr>
+                <tr>
+                    <td>67890</td>
+                    <td>Superfast Express</td>
+                    <td>12:30 PM</td>
+                    <td>05:30 PM</td>
+                    <td>Delayed</td>
+                </tr>
+                <tr>
+                    <td>11223</td>
+                    <td>Rajdhani Express</td>
+                    <td>03:00 PM</td>
+                    <td>08:00 PM</td>
+                    <td>On Time</td>
+                </tr>
+                <tr>
+                    <td>44556</td>
+                    <td>Shatabdi Express</td>
+                    <td>06:00 PM</td>
+                    <td>10:30 PM</td>
+                    <td>Cancelled</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        &copy; 2025 Company Name. All rights reserved.
+    </footer>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function filterTrains() {
+            let input = document.getElementById('search').value.toLowerCase();
+            let rows = document.querySelectorAll("#train-table tr");
+
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

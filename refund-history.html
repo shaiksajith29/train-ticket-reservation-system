@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund History</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 120px auto 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: linear-gradient(to right, #ff4f4f, #c00);
+            color: white;
+        }
+
+        .status-pending {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .status-approved {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-rejected {
+            color: red;
+            font-weight: bold;
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+            Refund History
+            <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+         </header>
+
+
+    <div class="container">
+        <h2>Your Refund Requests</h2>
+        <table>
+            <tr>
+                <th>Request ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>#12345</td>
+                <td>2025-03-01</td>
+                <td>$50</td>
+                <td class="status-approved">Approved</td>
+            </tr>
+            <tr>
+                <td>#12346</td>
+                <td>2025-03-05</td>
+                <td>$30</td>
+                <td class="status-pending">Pending</td>
+            </tr>
+            <tr>
+                <td>#12347</td>
+                <td>2025-03-08</td>
+                <td>$20</td>
+                <td class="status-rejected">Rejected</td>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+        &copy; 2025 Refund System | All Rights Reserved
+    </footer>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNR Enquiry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-size: cover;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover; 
+        }
+
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #0072ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0051cc;
+        }
+
+        .booking-details {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header><img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+        PNR-Enquiry
+        <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+     </header>
+</header>
+
+<div class="container">
+    <h2>Check Your Booking</h2>
+    <input type="text" id="pnrInput" placeholder="Enter PNR Number">
+    <button onclick="checkPNR()">Check PNR</button>
+    
+    <div class="booking-details" id="bookingDetails"></div>
+    <p class="error-message" id="errorMessage">PNR not found!</p>
+</div>
+
+<footer> &copy; 2025 Train Reservation System | All Rights Reserved </footer>
+
+<script>
+    function navigateTo(page) {
+        window.location.href = page;
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        // Default Bookings - Only added if sessionStorage is empty
+        let defaultBookings = [
+            { pnr: "1234567890", source: "Mumbai", destination: "Delhi", travelDate: "2025-03-15", classType: "AC 2 Tier" },
+            { pnr: "9876543210", source: "Bangalore", destination: "Hyderabad", travelDate: "2025-03-18", classType: "Sleeper" }
+        ];
+
+        if (!sessionStorage.getItem("sessionBookings")) {
+            sessionStorage.setItem("sessionBookings", JSON.stringify(defaultBookings));
+        }
+    });
+
+    function checkPNR() {
+        let pnrInput = document.getElementById("pnrInput").value.trim();
+        let bookings = JSON.parse(sessionStorage.getItem("sessionBookings")) || [];
+        let bookingDetailsDiv = document.getElementById("bookingDetails");
+        let errorMessage = document.getElementById("errorMessage");
+
+        bookingDetailsDiv.style.display = "none";
+        errorMessage.style.display = "none";
+
+        let foundBooking = bookings.find(booking => booking.pnr === pnrInput);
+
+        if (foundBooking) {
+            bookingDetailsDiv.innerHTML = `
+                <strong>PNR:</strong> ${foundBooking.pnr} <br>
+                <strong>From:</strong> ${foundBooking.source} <br>
+                <strong>To:</strong> ${foundBooking.destination} <br>
+                <strong>Date:</strong> ${foundBooking.travelDate} <br>
+                <strong>Class:</strong> ${foundBooking.classType} <br>
+            `;
+            bookingDetailsDiv.style.display = "block";
+        } else {
+            errorMessage.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>

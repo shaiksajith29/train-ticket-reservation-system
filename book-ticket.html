@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ticket</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-size: cover;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            
+        }
+        
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;  /* Center the heading */
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+        
+
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #fc1342;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #4f4fff;
+        }
+
+        .train-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .train-list li {
+            background: white;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: left;
+        }
+
+        .train-list li:hover {
+            background: #fc1342;
+            color: white;
+        }
+
+        #trainDetails {
+            display: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #0072ff;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+         <img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+        Train Reservation System
+        <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+    
+    </header>
+
+    <div class="container">
+        <h2>Book Your Ticket</h2>
+        <form id="bookTicketForm">
+            <label for="source">From:</label>
+            <input type="text" id="source" name="source" placeholder="Enter Source Station" required>
+
+            <label for="destination">To:</label>
+            <input type="text" id="destination" name="destination" placeholder="Enter Destination Station" required>
+
+            <label for="travelDate">Date of Journey:</label>
+            <input type="date" id="travelDate" name="travelDate" required>
+
+            <label for="classType">Class:</label>
+            <select id="classType" name="classType">
+                <option value="Sleeper">Sleeper</option>
+                <option value="AC">AC</option>
+                <option value="General">General</option>
+            </select>
+
+            <button type="submit">Search Trains</button>
+        </form>
+
+        <ul class="train-list" id="trainList" style="display: none;">
+            <!-- Train list will be shown here -->
+        </ul>
+
+        <div id="trainDetails"></div>
+    </div>
+
+    <footer>
+        &copy; 2025 Train Reservation System | All Rights Reserved
+    </footer>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        document.getElementById('bookTicketForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            // Get user inputs
+            let source = document.getElementById('source').value.trim();
+            let destination = document.getElementById('destination').value.trim();
+            let travelDate = document.getElementById('travelDate').value;
+        
+            // Validate inputs
+            if (source === "" || destination === "" || travelDate === "") {
+                alert("Please fill in all fields!");
+                return;
+            }
+        
+            // Show train list
+            showTrains(source, destination);
+        
+            // Scroll smoothly to the train list
+            setTimeout(() => {
+                document.getElementById("trainList").scrollIntoView({ behavior: "smooth" });
+            }, 300);  // Delay for better UI experience
+        });
+        
+        function showTrains(source, destination) {
+            let trainList = document.getElementById("trainList");
+            trainList.style.display = "block"; // Show train list
+            trainList.innerHTML = ""; // Clear previous results
+        
+            // Sample train data (You can replace this with dynamic data)
+            let trains = [
+    { name: "Vivek Express", number: "22503 / 22504" },
+    { name: "Okha - Tuticorin Vivek Express", number: "19567 / 19568" },
+    { name: "Santragachi - Mangalore Central Vivek Express", number: "22851 / 22852" },
+    { name: "Chennai - Mysuru Shatabdi Express", number: "12007 / 12008" },
+    { name: "Chennai - Bengaluru Double Decker Express", number: "22625 / 22626" },
+    { name: "Kochuveli - Bengaluru Humsafar Express", number: "16319 / 16320" },
+    { name: "Karnataka Express", number: "12627 / 12628" },
+    { name: "Thiruvananthapuram - Hazrat Nizamuddin Rajdhani Express", number: "12431 / 12432" },
+    { name: "Kanyakumari Express", number: "16525 / 16526" },
+    { name: "Chennai - Thiruvananthapuram Mail", number: "12623 / 12624" },
+    { name: "Chennai - Hyderabad Charminar Express", number: "12759 / 12760" },
+    { name: "Chennai - Coimbatore Intercity Express", number: "12679 / 12680" },
+    { name: "Chennai - Madurai Vaigai Express", number: "12635 / 12636" },
+    { name: "Chennai - Rameswaram Sethu Express", number: "16713 / 16714" },
+    { name: "Chennai - Tirupati Express", number: "16053 / 16054" },
+    { name: "Chennai - Mangalore Express", number: "12685 / 12686" },
+    { name: "Chennai - Kanyakumari Express", number: "12633 / 12634" },
+    { name: "Chennai - Ernakulam Superfast Express", number: "12695 / 12696" },
+    { name: "Chennai - Tiruchirapalli Rockfort Express", number: "12653 / 12654" },
+    { name: "Chennai - Tuticorin Pearl City Express", number: "12693 / 12694" },
+    { name: "Chennai - Coimbatore Kovai Express", number: "12675 / 12676" },
+    { name: "Chennai - Mangalore West Coast Express", number: "22637 / 22638" },
+    { name: "Chennai - Tirunelveli Nellai Express", number: "12631 / 12632" },
+    { name: "Chennai - Bangalore Brindavan Express", number: "12639 / 12640" },
+    { name: "Chennai - Mysore Kaveri Express", number: "16021 / 16022" },
+    { name: "Chennai - Bangalore Lalbagh Express", number: "12607 / 12608" },
+    { name: "Chennai - Vijayawada Jan Shatabdi Express", number: "12077 / 12078" },
+    { name: "Chennai - Madurai Pandian Express", number: "12637 / 12638" },
+    { name: "Bangalore - Mangalore Express", number: "16565 / 16566" },
+    { name: "Bangalore - Nagercoil Express", number: "17235 / 17236" },
+    { name: "Bangalore - Chennai Express", number: "12657 / 12658" },
+    { name: "Bangalore - Mysore Tippu Express", number: "12613 / 12614" },
+    { name: "Bangalore - Kannur Express", number: "16511 / 16512" },
+    { name: "Bangalore - Ernakulam Express", number: "16315 / 16316" },
+    { name: "Mysuru - Chennai Superfast Express", number: "12609 / 12610" },
+    { name: "Mysuru - Mangalore Express", number: "16517 / 16518" },
+    { name: "Mysuru - KSR Bengaluru Express", number: "16557 / 16558" },
+    { name: "Thiruvananthapuram - New Delhi Kerala Express", number: "12625 / 12626" },
+    { name: "Thiruvananthapuram - Mangalore Malabar Express", number: "16629 / 16630" },
+    { name: "Thiruvananthapuram - Mumbai Netravati Express", number: "16345 / 16346" },
+    { name: "Thiruvananthapuram - Gorakhpur Raptisagar Express", number: "12511 / 12512" },
+    { name: "Thiruvananthapuram - Hyderabad Express", number: "17229 / 17230" },
+    { name: "Thiruvananthapuram - Kochuveli Humsafar Express", number: "16319 / 16320" },
+    { name: "Thiruvananthapuram - Delhi Rajdhani Express", number: "12431 / 12432" },
+    { name: "Ernakulam - Pune Superfast Express", number: "22149 / 22150" },
+    { name: "Ernakulam - Hyderabad Sabari Express", number: "17229 / 17230" },
+    { name: "Ernakulam - Chennai Express", number: "12695 / 12696" },
+    { name: "Ernakulam - Bangalore Express", number: "16315 / 16316" }
+];
+
+        
+            // Display available trains
+            trains.forEach(train => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `${train.name} - ${train.number}`;
+                listItem.style.cursor = "pointer";
+                listItem.onclick = () => alert(`Train Selected: ${train.name} , Train booked successfully`);
+                trainList.appendChild(listItem);
+            });
+        }
+        
+    </script>
+
+</body>
+</html>

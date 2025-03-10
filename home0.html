@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Reservation System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover; /* Ensures the image covers the entire screen */
+        }
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-logo {
+            width: 80px;  /* Adjust size */
+            height: 80px; /* Adjust size */
+            border-radius: 50%;  /* Makes it circular */
+            cursor: pointer;
+        }
+        
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            width: 100%;
+            bottom: 0;
+        }
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 10px;
+        }
+        .menu li {
+            background: white;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .menu li:hover {
+            transform: scale(1.05);
+        }
+        .menu img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .menu span {
+            display: block;
+            font-weight: bold;
+        }
+
+        .container1 {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 100px 0;
+            padding: 50px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-in-out;
+        }
+        .text {
+            width: 45%;
+            font-size: 18px;
+            color: #0b0000;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-in-out;
+        }
+        .image {
+            width: 45%;
+            transform: translateX(50px);
+            transition: all 0.8s ease-in-out;
+        }
+        .image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .show .text {
+            transform: translateX(0);
+        }
+        .show .image {
+            transform: translateX(0);
+        }
+        .faq-item {
+            background: #e9ecef;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 6px solid #007bff;
+            font-size: 18px;
+            transition: 0.4s;
+        }
+        .faq-item:hover {
+            background: #d6e4ff;
+            transform: scale(1.02);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        h1{
+            color:#e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Train Reservation System</h1>
+        </header>
+    
+    <nav>
+        <ul class="menu">
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo1.jpg" alt="Book Ticket">
+                <span>Book Ticket</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo2.jpg" alt="My Bookings">
+                <span>My Bookings</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo3.jpg" alt="PNR Enquiry">
+                <span>PNR Enquiry</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo4.png" alt="Last Transactions">
+                <span>Last Transactions</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo5.png" alt="Upcoming Journey">
+                <span>Upcoming Journey</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo5.png" alt="Cancel Ticket">
+                <span>Cancel Ticket</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo7.jpg" alt="File TDR">
+                <span>File TDR</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo8.png" alt="Refund History">
+                <span>Refund History</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo9.jpg" alt="FAQ">
+                <span>FAQ</span>
+            </li>
+            <li onclick="navigateTo('login.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo10.jpg" alt="Train Schedule">
+                <span>Train Schedule</span>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="container1">
+        <h1>🚆 Welcome to Online Train Reservation</h1>
+
+        <div class="section">
+            <div class="text">
+                <h2>About Our Train Booking System</h2>
+                <p>Our online train reservation system provides a seamless ticket booking experience, allowing passengers to check schedules, book tickets, and manage their journeys with ease.</p>
+            </div>
+            <div class="image">
+                <img src="C:\Users\shaik\Desktop\train\img1.jpg" alt="Train Image">
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text">
+                <h2>Why Choose Our Service?</h2>
+                <p>✅ Instant ticket booking<br>
+                   ✅ Live PNR status & train updates<br>
+                   ✅ Secure and multiple payment options<br>
+                   ✅ Tatkal & emergency booking services<br>
+                   ✅ 24/7 customer support</p>
+            </div>
+            <div class="image">
+                <img src="C:\Users\shaik\Desktop\train\img2.jpg" alt="Railway Image">
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text">
+                <h2>How to Book Train Tickets?</h2>
+                <p>1️⃣ Visit our <a href="#">Online Train Booking Portal</a> or use our mobile app.<br>
+                   2️⃣ Log in or register.<br>
+                   3️⃣ Enter journey details and check availability.<br>
+                   4️⃣ Select a train and enter passenger details.<br>
+                   5️⃣ Make a secure payment.<br>
+                   6️⃣ Receive your e-ticket via email and SMS.</p>
+                <a href="login.html" class="btn">Book Tickets Now</a>
+            </div>
+            <div class="image">
+                <img src="C:\Users\shaik\Desktop\train\img3.jpg" alt="Ticket Booking">
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text">
+                <h2>Onboard Services</h2>
+                <p>🍽️ Order food online and get it delivered to your seat.<br>
+                   🚋 Luxury train journeys for a premium travel experience.<br>
+                   🏞️ Special pilgrimage and adventure tour packages.</p>
+            </div>
+            <div class="image">
+                <img src="C:\Users\shaik\Desktop\train\img4.jpg" alt="Food Delivery">
+            </div>
+        </div>
+
+        <h1>❓ Frequently Asked Questions (FAQs)</h1>
+        <div class="faq-item"><strong>Q: What is Tatkal Booking?</strong><br>A: Tatkal allows passengers to book tickets **one day before departure** for urgent travel.</div>
+        <div class="faq-item"><strong>Q: How can I check my PNR status?</strong><br>A: Visit our <a href="#">PNR Status Portal</a> and enter your **10-digit PNR number**.</div>
+        <div class="faq-item"><strong>Q: Can I cancel my ticket and get a refund?</strong><br>A: Yes, you can cancel your ticket online, and refunds will be processed as per our cancellation policy.</div>
+
+        <h1>📞 Need Help?</h1>
+        <h1>📧 Email: support@trainbooking.com | 📞 Helpline: 123-456-7890 (24/7 Support)</h1>
+        <br><br><br>
+</div>
+    
+    <footer>
+        &copy; 2025 Train Reservation System | All Rights Reserved
+    </footer>
+    
+    <script>
+        function revealSections() {
+            let sections = document.querySelectorAll(".section");
+
+            sections.forEach(section => {
+                let position = section.getBoundingClientRect().top;
+                let screenHeight = window.innerHeight;
+
+                if (position < screenHeight - 100) {
+                    section.classList.add("show");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", revealSections);
+        revealSections();
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        document.getElementById('bookTicketForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            // Get form values
+            let source = document.getElementById('source').value;
+            let destination = document.getElementById('destination').value;
+            let travelDate = document.getElementById('travelDate').value;
+            let classType = document.getElementById('classType').value;
+        
+            // Create a booking object
+            let booking = {
+                source: source,
+                destination: destination,
+                travelDate: travelDate,
+                classType: classType,
+                pnr: Math.floor(Math.random() * 9000000000) + 1000000000  // Generate random PNR
+            };
+        
+            // Retrieve existing bookings from localStorage
+            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        
+            // Add new booking
+            bookings.push(booking);
+        
+            // Save back to localStorage
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+        
+            alert("Ticket Booked Successfully! PNR: " + booking.pnr);
+        
+            // Redirect to My Bookings page
+            window.location.href = "my-bookings.html";
+        });
+        
+    </script>
+</body>
+</html>

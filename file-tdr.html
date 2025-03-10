@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File TDR</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover; 
+            background-position: center;
+        }
+
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 120px auto 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background: #ff4f4f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #c00;
+        }
+
+        .tdr-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+        .tdr-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            position: relative;
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+            File TDR
+        <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+    </header>
+
+    <div class="container">
+        <h2>Enter PNR to File TDR</h2>
+        <input type="text" id="pnrInput" placeholder="Enter PNR Number">
+        <select id="tdrReason">
+            <option value="" disabled selected>Select Reason</option>
+            <option value="Train Cancelled">Train Cancelled</option>
+            <option value="Passenger Not Traveled">Passenger Not Traveled</option>
+            <option value="Train Late More than 3 Hours">Train Late More than 3 Hours</option>
+            <option value="Wrongly Booked Ticket">Wrongly Booked Ticket</option>
+            <option value="Others">Others</option>
+        </select>
+        <br>
+        <button class="submit-btn" onclick="fileTDR()">Submit TDR</button>
+        <p id="message" style="font-weight: bold; margin-top: 15px;"></p>
+
+        <h3>Filed TDR Requests</h3>
+        <ul class="tdr-list" id="tdrList">
+            <!-- Filed TDRs will be displayed here -->
+        </ul>
+    </div>
+
+    <footer>
+        &copy; 2025 Train Reservation System | All Rights Reserved
+    </footer>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            let defaultTDRs = [
+                { pnr: "1234567890", reason: "Train Cancelled" },
+                { pnr: "0987654321", reason: "Train Late More than 3 Hours" }
+            ];
+
+            let storedTDRs = JSON.parse(localStorage.getItem("tdrs")) || [];
+            if (storedTDRs.length === 0) {
+                localStorage.setItem("tdrs", JSON.stringify(defaultTDRs));
+                storedTDRs = defaultTDRs;
+            }
+
+            let tdrList = document.getElementById("tdrList");
+            tdrList.innerHTML = ""; 
+
+            storedTDRs.forEach(tdr => {
+                let tdrItem = document.createElement("li");
+                tdrItem.classList.add("tdr-item");
+                tdrItem.innerHTML = `
+                    <strong>PNR:</strong> ${tdr.pnr} <br>
+                    <strong>Reason:</strong> ${tdr.reason} <br>
+                `;
+                tdrList.appendChild(tdrItem);
+            });
+        });
+
+        function fileTDR() {
+            let pnr = document.getElementById("pnrInput").value.trim();
+            let reason = document.getElementById("tdrReason").value;
+            let message = document.getElementById("message");
+
+            if (!pnr || !reason) {
+                message.textContent = "Please enter a valid PNR and select a reason.";
+                message.style.color = "red";
+                return;
+            }
+
+            let tdrs = JSON.parse(localStorage.getItem("tdrs")) || [];
+            tdrs.push({ pnr, reason });
+
+            localStorage.setItem("tdrs", JSON.stringify(tdrs));
+            alert("TDR Filed Successfully!");
+            location.reload();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover; 
+            background-position: center;
+        }
+
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 120px auto 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-item {
+            text-align: left;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .faq-answer {
+            display: none;
+            padding-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .toggle-icon {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+            FAQ
+            <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+         </header>
+
+    <div class="container">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(0)">
+                How can I request a refund? <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                You can request a refund by navigating to the 'Refund' section in your account and submitting the required details.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(1)">
+                How long does it take to process a refund? <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Refunds typically take 5-7 business days to process, depending on your payment method.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(2)">
+                Can I cancel my refund request? <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Yes, you can cancel your refund request within 24 hours of submission from your account dashboard.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(3)">
+                What if my refund is rejected? <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                If your refund is rejected, you can contact customer support for further assistance and review the reason provided.
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2025 Company Name. All rights reserved.
+    </footer>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function toggleFAQ(index) {
+            let answers = document.querySelectorAll('.faq-answer');
+            let icons = document.querySelectorAll('.toggle-icon');
+
+            if (answers[index].style.display === "block") {
+                answers[index].style.display = "none";
+                icons[index].textContent = "+";
+            } else {
+                answers[index].style.display = "block";
+                icons[index].textContent = "−";
+            }
+        }
+    </script>
+
+</body>
+</html>

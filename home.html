@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Reservation System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover; 
+        }
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 10px;
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-logo {
+            width: 80px;  /* Adjust size */
+            height: 80px; /* Adjust size */
+            border-radius: 50%;  /* Makes it circular */
+            cursor: pointer;
+        }
+        
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 10px;
+        }
+        .menu li {
+            background: white;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .menu li:hover {
+            transform: scale(1.05);
+        }
+        .menu img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .menu span {
+            display: block;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Train Reservation System</h1>
+        <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+    </header>
+    
+    <nav>
+        <ul class="menu">
+            <li onclick="navigateTo('book-ticket.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo1.jpg" alt="Book Ticket">
+                <span>Book Ticket</span>
+            </li>
+            <li onclick="navigateTo('my-bookings.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo2.jpg" alt="My Bookings">
+                <span>My Bookings</span>
+            </li>
+            <li onclick="navigateTo('pnr-enquiry.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo3.jpg" alt="PNR Enquiry">
+                <span>PNR Enquiry</span>
+            </li>
+            <li onclick="navigateTo('last-transactions.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo4.png">
+                <span>Last Transactions</span>
+            </li>
+            <li onclick="navigateTo('upcoming-journey.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo5.png" alt="Upcoming Journey">
+                <span>Upcoming Journey</span>
+            </li>
+            <li onclick="navigateTo('cancel-ticket.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo5.png">
+                <span>Cancel Ticket</span>
+            </li>
+            <li onclick="navigateTo('file-tdr.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo7.jpg" alt="File TDR">
+                <span>File TDR</span>
+            </li>
+            <li onclick="navigateTo('refund-history.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo8.png" alt="Refund History">
+                <span>Refund History</span>
+            </li>
+            <li onclick="navigateTo('faq.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo9.jpg" alt="FAQ">
+                <span>FAQ</span>
+            </li>
+            <li onclick="navigateTo('train-schedule.html')">
+                <img src="C:\Users\shaik\Desktop\train\logo10.jpg" alt="Train Schedule">
+                <span>Train Schedule</span>
+            </li>
+        </ul>
+    </nav>
+    
+    <footer>
+        &copy; 2025 Train Reservation System | All Rights Reserved
+    </footer>
+    
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        document.getElementById('bookTicketForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            // Get form values
+            let source = document.getElementById('source').value;
+            let destination = document.getElementById('destination').value;
+            let travelDate = document.getElementById('travelDate').value;
+            let classType = document.getElementById('classType').value;
+        
+            // Create a booking object
+            let booking = {
+                source: source,
+                destination: destination,
+                travelDate: travelDate,
+                classType: classType,
+                pnr: Math.floor(Math.random() * 9000000000) + 1000000000  // Generate random PNR
+            };
+        
+            // Retrieve existing bookings from localStorage
+            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        
+            // Add new booking
+            bookings.push(booking);
+        
+            // Save back to localStorage
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+        
+            alert("Ticket Booked Successfully! PNR: " + booking.pnr);
+        
+            // Redirect to My Bookings page
+            window.location.href = "my-bookings.html";
+        });
+        
+    </script>
+</body>
+</html>

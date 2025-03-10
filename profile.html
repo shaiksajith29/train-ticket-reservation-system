@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('C:/Users/shaik/Desktop/train/bg.jpeg') no-repeat center center fixed; 
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .user-logo, .home-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+        }
+        
+        .user-logo {
+            right: 20px;
+        }
+        
+        .home-logo {
+            left: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 100px auto 50px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .profile-pic {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 10px auto;
+            border: 3px solid #0072ff;
+        }
+
+        .upload-btn {
+            display: block;
+            margin: 10px auto;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: #0072ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .bt {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .bt:hover {
+            background: #f71520;
+        }
+
+        .btn:hover {
+            background: #005bcc;
+        }
+
+        footer {
+            background: linear-gradient(to right, #000000, #808080);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="C:\Users\shaik\Desktop\train\home.png" alt="Home" class="home-logo" onclick="navigateTo('home.html')">
+            User Profile
+            <img src="C:\Users\shaik\Desktop\train\user.png" alt="User Logo" class="user-logo" onclick="navigateTo('profile.html')">
+         </header>
+
+    <div class="container">
+        <h2>Profile Information</h2>
+        <img src="C:\Users\shaik\Desktop\train\me.jpg" alt="Profile Picture" class="profile-pic" id="profile-pic">
+        <input type="file" class="upload-btn" id="upload" accept="image/*">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" value="Shaik Sajith">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" value="shaiksajith29@gmail.com">
+
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" value="6302931073">
+
+        <button class="btn" onclick="saveProfile()">Save Changes</button>
+        <button class="bt" onclick="navigateTo('home0.html')">Logout</button>
+    </div>
+
+    <footer>
+        &copy; 2025 Company Name. All rights reserved.
+    </footer>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        document.getElementById('upload').addEventListener('change', function(event) {
+            let reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('profile-pic').src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        function saveProfile() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+            
+            alert("Profile Updated Successfully!\\nName: " + name + "\\nEmail: " + email + "\\nPhone: " + phone);
+        }
+    </script>
+
+</body>
+</html>
